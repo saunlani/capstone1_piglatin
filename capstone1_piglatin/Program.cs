@@ -5,16 +5,15 @@ namespace capstone1_piglatin
 {
     /* pig latin translator program.
      * ------------------------------------------------------------------------
-     * prompts user for a word .!
-     * translates word to Pig Latin, displays to console .!
-     * asks the user if they want to translate another word. .!
-     * 
-     * deep notes:
-     * converts each word to a lower case .!
-     * if word starts with a vowel, translator just adds "way" to the ending. .!
+     * prompts user for word(s). *DONE*
+     * translates word(s) to Pig Latin, displays to console.  *DONE*
+     * asks the user if they want to translate again. *DONE*
+     * converts each word to a lower case *DONE*
+     * if word starts with a vowel, "way" is simply added to the ending.*DONE*
      * if word starts with a consonant, all consosants before the first vowel 
-     * are moved to the end of the word, followed by an "ay".
-     * accepts series of words. .!
+     * are moved to the end of the word, followed by an "ay". *DONE*
+     * accepts series of words. *DONE*
+     * 
      * TODO:  ALLOW PUNCTUATION.
      * TODO:  KEEP THE CASE.
      */
@@ -57,9 +56,7 @@ namespace capstone1_piglatin
 
                 //declaring vowels
                 string vowels = "aeiou";
-
                 // index of first vowel appearance
-
                 int firstvowel = 0;
 
                 //checks input for a vowel in firstletterofword and ensures is only 
@@ -68,6 +65,7 @@ namespace capstone1_piglatin
                 {
                     Console.Write( word + "way ");
                 }
+
                 // if input is not only letters, returns false and prints the input
                 // as is.
                 else if (IsOnlyLetters(word) == false)
@@ -81,7 +79,7 @@ namespace capstone1_piglatin
                 // moves first letter of word to end of input and adds "ay".
 
                 // TODO: if word starts with a consonant,move all of the consonants that
-                // appear before the first vowel (ex: shrewd = ewd shr ay)
+                // appear before the first vowel (ex: shrewd = ewdshray)
 
                 else if (vowels.Contains(firstletterofword) == false & vowels.Contains(word) == false)
                 {
@@ -95,8 +93,6 @@ namespace capstone1_piglatin
                     string aftervowel = word.Substring(firstvowel);
 
                     Console.Write(aftervowel + beforevowel + "ay ");
-                    // Console.WriteLine("Starts with consonant, the index of the first vowel is " + firstvowel);
-                    // Console.WriteLine(restofword + firstletterofword + "ay");
                 }
                 else
                 {}
