@@ -40,10 +40,10 @@ namespace capstone1_piglatin
         // takes input & translates.
         static void Translator()
         {
-            Console.Write("Enter a line to be translated:  ");
+            Console.Write("\nEnter a line to be translated:  ");
             string rawinput = Console.ReadLine();
             string userinput = rawinput.ToLower();
-            Console.Write("Translation:  ");
+            Console.Write("\nTranslation:  ");
             string[] individualwords = userinput.Split(' ');
 
             foreach (string word in individualwords)
@@ -108,9 +108,8 @@ namespace capstone1_piglatin
         {
             do
             {
-                Console.Write("\nTranslate another line? (y/n):  ");
-                string userresponse = Console.ReadLine();
-                userresponse.ToLower();
+                Console.Write("\n\nTranslate another line? (y/n):  ");
+                string userresponse = Console.ReadLine().ToLower();
 
 
                 if (userresponse == "y")
