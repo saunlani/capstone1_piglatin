@@ -10,7 +10,7 @@ namespace capstone1_piglatin
      * translates word(s) to Pig Latin, displays to console.
      * asks the user if they want to translate again.
      * if word starts with a vowel, "way" is simply added to the ending.
-     * if word starts with a consonant, all consosants before the first vowel 
+     * if word starts with a consonant, all consonants before the first vowel 
      * are moved to the end of the word, followed by an "ay".
      * accepts series of words.
      * keeps the case of the word, UPPERCASE, Title Case or lowercase.
@@ -90,7 +90,7 @@ namespace capstone1_piglatin
                              && (word.Length >= 2))
                     {
 
-                        Console.Write(word + "WAY");
+                        Console.Write(word + "WAY ");
 
                     }
 
@@ -123,6 +123,15 @@ namespace capstone1_piglatin
                         string beforepunc = word.Substring(0, puncloc);
                         string afterpunc = word.Substring(puncloc);
                         Console.Write(beforepunc + "way" + afterpunc + " ");
+                    }
+
+                    /* I = IWAY */
+                    else if ((PuncChecker(word) != true
+                              && ( word.Length ==1)
+                              && VowelChecker(firstletterofword) == true
+                              && (firstletterofword.ToUpper() == firstletterofword)))
+                    {
+                        Console.Write(word + "WAY ");
                     }
 
                     /* Indigo = Indigoway */
@@ -166,7 +175,7 @@ namespace capstone1_piglatin
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
                         string aftervowel = word.Substring(firstvowel);
-                        Console.Write(aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "AY" + afterpunc + " ");
+                        Console.Write( aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "AY" + afterpunc + " ");
                     }
 
                     /* shoes = oeshay */
