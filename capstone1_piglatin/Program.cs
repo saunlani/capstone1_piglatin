@@ -15,12 +15,11 @@ namespace capstone1_piglatin
      * accepts series of words.
      * keeps the case of the word, UPPERCASE, Title Case or lowercase.
      * accepts words with contractions.
-     * 
-     * 
-     * TODO:  ALLOW PUNCTUATION. */
+     * accepts punctuation. */
 
     class MainClass
     {
+        
         public static void Main(string[] args)
         {
             Welcomer();
@@ -47,7 +46,7 @@ namespace capstone1_piglatin
 
 
             // checks for input of at least 1 key besides return.
-            if (validentrychecker(userinput) == false)
+            if (ValidEntryChecker(userinput) == false)
             {
                 Console.Write("\nYou didn't enter anything!");
             }
@@ -67,6 +66,13 @@ namespace capstone1_piglatin
                     //declaring vowels
                     string vowels = "aeiouAEIOU";
 
+                    //declaring punctuation
+                    string punctuation = ",.?!;:";
+
+
+                    //index of punctuation
+                    int puncloc = 0;
+
                     // index of first vowel appearance
                     int firstvowel = 0;
 
@@ -78,27 +84,70 @@ namespace capstone1_piglatin
                     }
 
                     /* INDIGO = INDIGOWAY */
-                    else if (VowelChecker(firstletterofword) == true && (word.ToUpper() == word) && (word.Length >= 2))
+                    else if (PuncChecker(word) != true
+                             && VowelChecker(firstletterofword) == true
+                             && (word.ToUpper() == word)
+                             && (word.Length >= 2))
                     {
 
                         Console.Write(word + "WAY");
 
                     }
 
+                    /* INDIGO. = INDIGOWAY. */
+                    else if (VowelChecker(firstletterofword) == true
+                             && (word.ToUpper() == word)
+                             && (word.Length >= 2))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.Write(beforepunc + "WAY" + afterpunc + " ");
+
+                    }
+
                     /* indigo = indigoway */
-                    else if (VowelChecker(firstletterofword) == true && (word.ToLower() == word))
+                    else if (PuncChecker(word) != true
+                             && VowelChecker(firstletterofword) == true
+                             && (word.ToLower() == word))
                     {
                         Console.Write(word + "way ");
+                    }
+
+                    /* indigo. = indigoway. */
+                    else if (VowelChecker(firstletterofword) == true
+                             && (word.ToLower() == word)
+                             && (word.Length >= 2))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.Write(beforepunc + "way" + afterpunc + " ");
                     }
 
                     /* Indigo = Indigoway */
-                    else if ((VowelChecker(firstletterofword) == true && (firstletterofword.ToUpper() == firstletterofword)))
+                    else if ((PuncChecker(word) != true
+                              && VowelChecker(firstletterofword) == true
+                              && (firstletterofword.ToUpper() == firstletterofword)))
                     {
                         Console.Write(word + "way ");
                     }
 
-                    /* SHOES = OESHWAY */
-                    else if (word.ToUpper() == word && VowelChecker(firstletterofword) == false && VowelChecker(word))
+                    /* Indigo. = Indigoway. */
+                    else if ((VowelChecker(firstletterofword) == true
+                              && (firstletterofword.ToUpper() == firstletterofword)))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.Write(beforepunc + "way" + afterpunc + " ");
+                    }
+
+                    /* SHOES = OESHAY */
+                    else if (PuncChecker(word) != true
+                             && word.ToUpper() == word
+                             && VowelChecker(firstletterofword) == false
+                             && VowelChecker(word))
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
@@ -106,8 +155,24 @@ namespace capstone1_piglatin
                         Console.Write(aftervowel + beforevowel + "AY ");
                     }
 
+                    /* SHOES. = OESHAY. */
+                    else if (word.ToUpper() == word
+                             && VowelChecker(firstletterofword) == false
+                             && VowelChecker(word))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        Console.Write(aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "AY" + afterpunc + " ");
+                    }
+
                     /* shoes = oeshay */
-                    else if (VowelChecker(word) == true && (firstletterofword.ToUpper() != firstletterofword))
+                    else if (PuncChecker(word) != true
+                             && VowelChecker(word) == true
+                             && (firstletterofword.ToUpper() != firstletterofword))
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
@@ -115,8 +180,24 @@ namespace capstone1_piglatin
                         Console.Write(aftervowel + beforevowel + "ay ");
                     }
 
+                    /* shoes. = oeshay. */
+                    else if (VowelChecker(word) == true
+                             && (firstletterofword.ToUpper() != firstletterofword))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        Console.Write(aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "ay" + afterpunc + " ");
+                    }
+
                     /* Shoes = Oeshay */
-                    else if (VowelChecker(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword && VowelChecker(word) == true)
+                    else if (PuncChecker(word) != true &&
+                             VowelChecker(firstletterofword) == false
+                             && firstletterofword.ToUpper() == firstletterofword
+                             && VowelChecker(word) == true)
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
@@ -124,23 +205,79 @@ namespace capstone1_piglatin
                         Console.Write(char.ToUpper(aftervowel[0]) + aftervowel.Substring(1) + beforevowel.ToLower() + "ay ");
                     }
 
+                    /* Shoes. = Oeshay. */
+                    else if (VowelChecker(firstletterofword) == false
+                             && firstletterofword.ToUpper() == firstletterofword
+                             && VowelChecker(word) == true)
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        string titledword = (aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "ay" + afterpunc + " ");
+                        Console.WriteLine(TitleCase(titledword));
+                    }
+
                     /* SHH = SHHAY */
-                    else if (word.ToUpper() == word && VowelChecker(word) == false)
+                    else if (PuncChecker(word) != true
+                             && word.ToUpper() == word &&
+                             VowelChecker(word) == false && word.Length >= 2)
                     {
                         Console.Write(word + "AY ");
                     }
 
+                    /* SHH. = SHHAY. */
+                    else if (VowelChecker(firstletterofword) == false
+                             && (word.ToUpper() == word)
+                             && (word.Length >= 2))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.Write(beforepunc + "AY" + afterpunc + " ");
+                    }
+
                     /* shh = shhay */
-                    else if (word.ToLower() == word && VowelChecker(word) == false)
+                    else if (PuncChecker(word) != true
+                             && word.ToLower() == word
+                             && VowelChecker(word) == false)
                     {
                         Console.Write(word + "ay ");
                     }
 
+                    /* shh. = shhay. */
+                    else if (VowelChecker(firstletterofword) == false
+                             && (word.ToLower() == word)
+                             && (word.Length >= 2))
+                    {
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.Write(beforepunc + "ay" + afterpunc + " ");
+                    }
+
                     /* Shh = Shhay */
-                    else if (VowelChecker(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword && VowelChecker(word) == false)
+                    else if (PuncChecker(word) != true
+                             && VowelChecker(firstletterofword) == false 
+                             && firstletterofword.ToUpper() == firstletterofword 
+                             && VowelChecker(word) == false)
                     {
 
                         Console.Write(word + "ay ");                    
+                    }
+
+                    /* Shh. = Shhay. */
+                    else if (VowelChecker(firstletterofword) == false 
+                             && firstletterofword.ToUpper() == firstletterofword 
+                             && VowelChecker(word) == false)
+                    {
+
+                        puncloc = word.IndexOfAny(punctuation.ToCharArray());
+                        string beforepunc = word.Substring(0, puncloc);
+                        string afterpunc = word.Substring(puncloc);
+                        Console.WriteLine(beforepunc + "ay" + afterpunc);
                     }
                     else
                     { }
@@ -178,9 +315,10 @@ namespace capstone1_piglatin
             } while (true);
         }
 
+        // test for input without special characters
         static bool IsOnlyLetters(string dainput)
         {
-            var regexItem = new Regex("^[a-z._A-Z']+$");
+            var regexItem = new Regex("^[a-z.,!?;:_A-Z']+$");
             if (regexItem.IsMatch(dainput))
             {
                 return true;
@@ -190,10 +328,29 @@ namespace capstone1_piglatin
                 return false;
             }
         }
-
-        static bool validentrychecker (string aninput)
+        // test for punctuation
+        static bool PuncChecker(string input)
         {
-            if (aninput.Length <= 0)
+            if (Regex.IsMatch(input, @"[.!?,;]"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // convert a string to english title case
+        static string TitleCase(string dainput)
+        {
+            return new CultureInfo("en").TextInfo.ToTitleCase(dainput.ToLower());
+        }
+
+        // test for input greater than 0 keys
+        static bool ValidEntryChecker (string aninput)
+        {
+            if (String.IsNullOrWhiteSpace(aninput))
                 return false;
             else
             {
@@ -202,6 +359,7 @@ namespace capstone1_piglatin
             }
         }
 
+        // test for vowels
         static bool VowelChecker (string input)
         {
             if (Regex.IsMatch(input, @"[aeiou]", RegexOptions.IgnoreCase))
@@ -214,4 +372,5 @@ namespace capstone1_piglatin
         }
 
     }
+
 }
