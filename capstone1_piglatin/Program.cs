@@ -6,14 +6,13 @@ namespace capstone1_piglatin
 {
     /* pig latin translator program.
      * ------------------------------------------------------------------------
-     * prompts user for word(s). *DONE*
-     * translates word(s) to Pig Latin, displays to console.  *DONE*
-     * asks the user if they want to translate again. *DONE*
-     * converts each word to a lower case *DONE*
-     * if word starts with a vowel, "way" is simply added to the ending.*DONE*
+     * prompts user for word(s). validation for input.
+     * translates word(s) to Pig Latin, displays to console.
+     * asks the user if they want to translate again.
+     * if word starts with a vowel, "way" is simply added to the ending.
      * if word starts with a consonant, all consosants before the first vowel 
-     * are moved to the end of the word, followed by an "ay". *DONE*
-     * accepts series of words. *DONE*
+     * are moved to the end of the word, followed by an "ay".
+     * accepts series of words.
      * keeps the case of the word, UPPERCASE, Title Case or lowercase.
      * 
      * TOFO:  CHECK THAT THE USER HAS ACTUALLY ENTERED TEXT BEFORE TRANSLATING.
