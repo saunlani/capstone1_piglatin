@@ -234,15 +234,14 @@ namespace capstone1_piglatin
                     /* SHH = SHHAY */
                     else if (PuncChecker(word) != true
                              && word.ToUpper() == word &&
-                             VowelChecker(word) == false && word.Length >= 2)
+                             VowelChecker(word) == false)
                     {
                         Console.Write(word + "AY ");
                     }
 
                     /* SHH. = SHHAY. */
                     else if (VowelChecker(firstletterofword) == false
-                             && (word.ToUpper() == word)
-                             && (word.Length >= 2))
+                             && (word.ToUpper() == word))
                     {
                         puncloc = word.IndexOfAny(punctuation.ToCharArray());
                         string beforepunc = word.Substring(0, puncloc);
@@ -339,7 +338,7 @@ namespace capstone1_piglatin
                 return false;
             }
         }
-
+        // checks for input other than letters
         static bool SymbolChecker(string input)
         {
             var regexItem = new Regex(@"[a-zA-Z]");
