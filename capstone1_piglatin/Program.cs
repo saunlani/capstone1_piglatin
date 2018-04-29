@@ -6,7 +6,8 @@ namespace capstone1_piglatin
 {
     /* pig latin translator program.
      * ------------------------------------------------------------------------
-     * prompts user for word(s). validation for input.
+     * prompts user for word(s).
+     * input validation for each word in sentence.
      * translates word(s) to Pig Latin, displays to console.
      * asks the user if they want to translate again.
      * if word starts with a vowel, "way" is simply added to the ending.
@@ -57,6 +58,10 @@ namespace capstone1_piglatin
                 string[] individualwords = userinput.Split(' ');
                 foreach (string word in individualwords)
                 {
+                    if (ValidEntryChecker(word) == false)
+                        continue;
+                    else
+                    {}
                     //grabbing the first letter
                     string firstletterofword = word.Substring(0, 1);
 
