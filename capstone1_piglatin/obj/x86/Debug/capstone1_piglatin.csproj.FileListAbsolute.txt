@@ -1,0 +1,12 @@
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/bin/Debug/capstone1_piglatin.exe
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/bin/Debug/capstone1_piglatin.pdb
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.csproj.CoreCompileInputs.cache
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.exe
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.pdb
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/bin/Debug/capstone1_piglatin.exe
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/bin/Debug/capstone1_piglatin.pdb
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.csprojResolveAssemblyReference.cache
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.csproj.CoreCompileInputs.cache
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.exe
+//vmware-host/Shared Folders/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.pdb
+/Users/shaunalan/Projects/capstone1_piglatin/capstone1_piglatin/obj/x86/Debug/capstone1_piglatin.csprojResolveAssemblyReference.cache

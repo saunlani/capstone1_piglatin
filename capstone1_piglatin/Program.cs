@@ -14,6 +14,7 @@ namespace capstone1_piglatin
      * are moved to the end of the word, followed by an "ay". *DONE*
      * accepts series of words. *DONE*
      * 
+     * TOFO:  CHECK THAT THE USER HAS ACTUALLY ENTERED TEXT BEFORE TRANSLATING.
      * TODO:  ALLOW PUNCTUATION.
      * TODO:  KEEP THE CASE.
      */
@@ -43,60 +44,70 @@ namespace capstone1_piglatin
             Console.Write("\nEnter a line to be translated:  ");
             string rawinput = Console.ReadLine();
             string userinput = rawinput.ToLower();
-            Console.Write("\nTranslation:  ");
-            string[] individualwords = userinput.Split(' ');
 
-            foreach (string word in individualwords)
+            // checks for input of at least 1.
+            if (validentrychecker(userinput) == false)
             {
-                //grabbing the first two letters
-                string firstletterofword = word.Substring(0, 1);
-
-                //grabbing the rest of the word
-                string restofword = word.Substring(1, word.Length - 1);
-
-                //declaring vowels
-                string vowels = "aeiou";
-                // index of first vowel appearance
-                int firstvowel = 0;
-
-                //checks input for a vowel in firstletterofword and ensures is only 
-                //letters
-                if (vowels.Contains(firstletterofword) && IsOnlyLetters(word))
-                {
-                    Console.Write( word + "way ");
-                }
-
-                // if input is not only letters, returns false and prints the input
-                // as is.
-                else if (IsOnlyLetters(word) == false)
-                {
-                    Console.Write(word);
-                }
-
-                // checks that vowel is NOT first letter of word (starts with
-                // consonant.  
-                //
-                // moves first letter of word to end of input and adds "ay".
-
-                // TODO: if word starts with a consonant,move all of the consonants that
-                // appear before the first vowel (ex: shrewd = ewdshray)
-
-                else if (vowels.Contains(firstletterofword) == false & vowels.Contains(word) == false)
-                {
-                    Console.Write(restofword + firstletterofword + "ay ");
-                }
-                else if (vowels.Contains(firstletterofword) == false)
-                {
-                    firstvowel = word.IndexOfAny(vowels.ToCharArray());
-
-                    string beforevowel = word.Substring(0, firstvowel);
-                    string aftervowel = word.Substring(firstvowel);
-
-                    Console.Write(aftervowel + beforevowel + "ay ");
-                }
-                else
-                {}
+                Console.Write("\nYou didn't enter anything!");
             }
+            else
+            {
+                Console.Write("\nTranslation:  ");
+
+                string[] individualwords = userinput.Split(' ');
+                foreach (string word in individualwords)
+                {
+                    //grabbing the first two letters
+                    string firstletterofword = word.Substring(0, 1);
+
+                    //grabbing the rest of the word
+                    string restofword = word.Substring(1, word.Length - 1);
+
+                    //declaring vowels
+                    string vowels = "aeiou";
+                    // index of first vowel appearance
+                    int firstvowel = 0;
+
+                    //checks input for a vowel in firstletterofword and ensures is only 
+                    //letters
+                    if (vowels.Contains(firstletterofword) && IsOnlyLetters(word))
+                    {
+                        Console.Write(word + "way ");
+                    }
+
+                    // if input is not only letters, returns false and prints the input
+                    // as is.
+                    else if (IsOnlyLetters(word) == false)
+                    {
+                        Console.Write(word);
+                    }
+
+                    // checks that vowel is NOT first letter of word (starts with
+                    // consonant.  
+                    //
+                    // moves first letter of word to end of input and adds "ay".
+
+                    // TODO: if word starts with a consonant,move all of the consonants that
+                    // appear before the first vowel (ex: shrewd = ewdshray)
+
+                    else if (vowels.Contains(firstletterofword) == false & vowels.Contains(word) == false)
+                    {
+                        Console.Write(restofword + firstletterofword + "ay ");
+                    }
+                    else if (vowels.Contains(firstletterofword) == false)
+                    {
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+
+                        Console.Write(aftervowel + beforevowel + "ay ");
+                    }
+                    else
+                    { }
+                }  
+            }
+
 
 
 
@@ -122,7 +133,7 @@ namespace capstone1_piglatin
                 }
                 else if (userresponse != "y" && userresponse != "n")
                 {
-                    Console.WriteLine("You did not enter a valid response.");
+                    Console.Write("\nYou did not enter a valid response.");
                     continue;
                 }
                 else
@@ -142,6 +153,17 @@ namespace capstone1_piglatin
             else
             {
                 return false;
+            }
+        }
+
+        static bool validentrychecker (string aninput)
+        {
+            if (aninput.Length <= 0)
+                return false;
+            else
+            {
+                return true;
+
             }
         }
 
