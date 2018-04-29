@@ -42,10 +42,8 @@ namespace capstone1_piglatin
         static void Translator()
         {
             Console.Write("\nEnter a line to be translated:  ");
-            string rawinput = Console.ReadLine();
-            string userinput = rawinput;
-
-
+            string userinput = Console.ReadLine();
+           
             // checks for input of at least 1 key besides return.
             if (ValidEntryChecker(userinput) == false)
             {
@@ -74,16 +72,15 @@ namespace capstone1_piglatin
                     //declaring punctuation
                     string punctuation = ",.?!;:";
 
+                    // index of first vowel appearance
+                    int firstvowel = 0;
 
                     //index of punctuation
                     int puncloc = 0;
 
-                    // index of first vowel appearance
-                    int firstvowel = 0;
-
-
-                    /* is the input ONLY symbols or numbers? (ex: 15252)*/
-                    if (IsOnlyLetters(word) == false || PuncChecker(word))
+                    /* catches numbers, symbols, punctuation and apostrophes by
+                     * themselves */
+                    if (AcceptableInput(word) == false || SymbolChecker(firstletterofword) == false)
                     {
 
                         Console.Write(word + " ");
@@ -111,7 +108,6 @@ namespace capstone1_piglatin
                         Console.Write(beforepunc + "WAY" + afterpunc + " ");
 
                     }
-
                     /* indigo = indigoway */
                     else if (PuncChecker(word) != true
                              && VowelChecker(firstletterofword) == true
@@ -231,8 +227,8 @@ namespace capstone1_piglatin
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
                         string aftervowel = word.Substring(firstvowel);
-                        string titledword = (aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "ay" + afterpunc + " ");
-                        Console.WriteLine(TitleCase(titledword));
+                        string titlethisword= (aftervowel.Remove(aftervowel.Length - 1) + beforevowel + "ay" + afterpunc + " ");
+                        Console.WriteLine(TitleCase(titlethisword));
                     }
 
                     /* SHH = SHHAY */
@@ -331,7 +327,7 @@ namespace capstone1_piglatin
         }
 
         // test for input without special characters
-        static bool IsOnlyLetters(string dainput)
+        static bool AcceptableInput(string dainput)
         {
             var regexItem = new Regex("^[a-z.,!?;:_A-Z']+$");
             if (regexItem.IsMatch(dainput))
@@ -341,6 +337,16 @@ namespace capstone1_piglatin
             else
             {
                 return false;
+            }
+        }
+
+        static bool SymbolChecker(string input)
+        {
+            var regexItem = new Regex(@"[a-zA-Z]");
+            if (regexItem.IsMatch(input))
+                return true;
+            else
+            { return false; 
             }
         }
         // test for punctuation
@@ -385,6 +391,7 @@ namespace capstone1_piglatin
             { return false; 
             }
         }
+
 
     }
 
