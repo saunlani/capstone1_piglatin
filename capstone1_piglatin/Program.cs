@@ -14,10 +14,10 @@ namespace capstone1_piglatin
      * are moved to the end of the word, followed by an "ay".
      * accepts series of words.
      * keeps the case of the word, UPPERCASE, Title Case or lowercase.
+     * accepts words with contractions.
      * 
-     * TOFO:  CHECK THAT THE USER HAS ACTUALLY ENTERED TEXT BEFORE TRANSLATING.
-     * TODO:  ALLOW PUNCTUATION.
-     */
+     * 
+     * TODO:  ALLOW PUNCTUATION. */
 
     class MainClass
     {
@@ -64,38 +64,38 @@ namespace capstone1_piglatin
                     //grabbing the rest of the word
                     string restofword = word.Substring(1, word.Length - 1);
 
-                    //declaring vowels
-                    string vowels = "aeiouAEIOU";
                     // index of first vowel appearance
                     int firstvowel = 0;
 
-
-                    /* is the input ONLY letters? */
-
+                    /* is the input ONLY symbols or numbers? (ex: 15252)*/
                     if (IsOnlyLetters(word) == false)
                     {
-                        Console.Write(word);
+
+                        Console.Write(word + " ");
                     }
 
-                    /* is the first letter of the word a vowel, and 
-                     * is the word all caps? */
-
-                    else if (vowels.Contains(firstletterofword) && word.ToUpper() == word)
+                    /* INDIGO = INDIGOWAY */
+                    else if (VowelChecker(firstletterofword) == true && (word.ToUpper() == word) && (word.Length >= 2))
                     {
-                        Console.Write(word + "WAY ");
+
+                        Console.Write(word + "WAY");
+
                     }
 
-                    /* is the first letter of the word a vowel? */
-
-                    else if (vowels.Contains(firstletterofword))
+                    /* indigo = indigoway */
+                    else if (VowelChecker(firstletterofword) == true && (word.ToLower() == word))
                     {
                         Console.Write(word + "way ");
                     }
 
-                    /* is the first letter of the word a vowel, and is the word
-                     * all upper case? */
+                    /* Indigo = Indigoway */
+                    else if ((VowelChecker(firstletterofword) == true && (firstletterofword.ToUpper() == firstletterofword)))
+                    {
+                        Console.Write(word + "way ");
+                    }
 
-                    else if (vowels.Contains(firstletterofword) == false && word.ToUpper() == word)
+                    /* SHOES = OESHWAY */
+                    else if (word.ToUpper() == word && VowelChecker(firstletterofword) == false && VowelChecker(word))
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
@@ -103,10 +103,17 @@ namespace capstone1_piglatin
                         Console.Write(aftervowel + beforevowel + "AY ");
                     }
 
-                    /* is the first letter of the word a vowel and is the 
-                     * world in Title Case? */
+                    /* shoes = oeshay */
+                    else if (VowelChecker(word) == true && (firstletterofword.ToUpper() != firstletterofword))
+                    {
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        Console.Write(aftervowel + beforevowel + "ay ");
+                    }
 
-                    else if (vowels.Contains(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword)
+                    /* Shoes = Oeshay */
+                    else if (VowelChecker(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword && VowelChecker(word) == true)
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
                         string beforevowel = word.Substring(0, firstvowel);
@@ -114,27 +121,29 @@ namespace capstone1_piglatin
                         Console.Write(char.ToUpper(aftervowel[0]) + aftervowel.Substring(1) + beforevowel.ToLower() + "ay ");
                     }
 
-                    /* is the first letter of the word a vowel and is the word
-                     * all lower case? */
-
-                    else if (vowels.Contains(firstletterofword) == false)
+                    /* SHH = SHHAY */
+                    else if (word.ToUpper() == word && VowelChecker(word) == false)
                     {
-                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
-                        string beforevowel = word.Substring(0, firstvowel);
-                        string aftervowel = word.Substring(firstvowel);
-                      
-                        Console.Write(aftervowel + beforevowel + "ay ");
+                        Console.Write(word + "AY ");
                     }
 
+                    /* shh = shhay */
+                    else if (word.ToLower() == word && VowelChecker(word) == false)
+                    {
+                        Console.Write(word + "ay ");
+                    }
+
+                    /* Shh = Shhay */
+                    else if (VowelChecker(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword && VowelChecker(word) == false)
+                    {
+
+                        Console.Write(word + "ay ");                    
+                    }
                     else
                     { }
-                }  
+                }
+
             }
-
-
-
-
-
         }
 
         // Asks the user if they would like to translate another input
@@ -168,7 +177,7 @@ namespace capstone1_piglatin
 
         static bool IsOnlyLetters(string dainput)
         {
-            var regexItem = new Regex("^[a-zA-Z]+$");
+            var regexItem = new Regex("^[a-z._A-Z']+$");
             if (regexItem.IsMatch(dainput))
             {
                 return true;
@@ -187,6 +196,17 @@ namespace capstone1_piglatin
             {
                 return true;
 
+            }
+        }
+
+        static bool VowelChecker (string input)
+        {
+            if (Regex.IsMatch(input, @"[aeiou]", RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            { return false; 
             }
         }
 
