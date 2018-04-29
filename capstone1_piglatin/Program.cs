@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace capstone1_piglatin
@@ -13,10 +14,10 @@ namespace capstone1_piglatin
      * if word starts with a consonant, all consosants before the first vowel 
      * are moved to the end of the word, followed by an "ay". *DONE*
      * accepts series of words. *DONE*
+     * keeps the case of the word, UPPERCASE, Title Case or lowercase.
      * 
      * TOFO:  CHECK THAT THE USER HAS ACTUALLY ENTERED TEXT BEFORE TRANSLATING.
      * TODO:  ALLOW PUNCTUATION.
-     * TODO:  KEEP THE CASE.
      */
 
     class MainClass
@@ -43,9 +44,10 @@ namespace capstone1_piglatin
         {
             Console.Write("\nEnter a line to be translated:  ");
             string rawinput = Console.ReadLine();
-            string userinput = rawinput.ToLower();
+            string userinput = rawinput;
 
-            // checks for input of at least 1.
+
+            // checks for input of at least 1 key besides return.
             if (validentrychecker(userinput) == false)
             {
                 Console.Write("\nYou didn't enter anything!");
@@ -57,49 +59,74 @@ namespace capstone1_piglatin
                 string[] individualwords = userinput.Split(' ');
                 foreach (string word in individualwords)
                 {
-                    //grabbing the first two letters
+                    //grabbing the first letter
                     string firstletterofword = word.Substring(0, 1);
 
                     //grabbing the rest of the word
                     string restofword = word.Substring(1, word.Length - 1);
 
                     //declaring vowels
-                    string vowels = "aeiou";
+                    string vowels = "aeiouAEIOU";
                     // index of first vowel appearance
                     int firstvowel = 0;
 
-                    //checks input for a vowel in firstletterofword and ensures is only 
-                    //letters
-                    if (vowels.Contains(firstletterofword) && IsOnlyLetters(word))
-                    {
-                        Console.Write(word + "way ");
-                    }
 
-                    // if input is not only letters, returns false and prints the input
-                    // as is.
-                    else if (IsOnlyLetters(word) == false)
+                    /* is the input ONLY letters? */
+
+                    if (IsOnlyLetters(word) == false)
                     {
                         Console.Write(word);
                     }
 
-                    // checks that vowel is NOT first letter of word (starts with
-                    // consonant.  
-                    //
-                    // moves first letter of word to end of input and adds "ay".
+                    /* is the first letter of the word a vowel, and 
+                     * is the word all caps? */
 
-                    else if (vowels.Contains(firstletterofword) == false & vowels.Contains(word) == false)
+                    else if (vowels.Contains(firstletterofword) && word.ToUpper() == word)
                     {
-                        Console.Write(restofword + firstletterofword + "ay ");
+                        Console.Write(word + "WAY ");
                     }
+
+                    /* is the first letter of the word a vowel? */
+
+                    else if (vowels.Contains(firstletterofword))
+                    {
+                        Console.Write(word + "way ");
+                    }
+
+                    /* is the first letter of the word a vowel, and is the word
+                     * all upper case? */
+
+                    else if (vowels.Contains(firstletterofword) == false && word.ToUpper() == word)
+                    {
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        Console.Write(aftervowel + beforevowel + "AY ");
+                    }
+
+                    /* is the first letter of the word a vowel and is the 
+                     * world in Title Case? */
+
+                    else if (vowels.Contains(firstletterofword) == false && firstletterofword.ToUpper() == firstletterofword)
+                    {
+                        firstvowel = word.IndexOfAny(vowels.ToCharArray());
+                        string beforevowel = word.Substring(0, firstvowel);
+                        string aftervowel = word.Substring(firstvowel);
+                        Console.Write(char.ToUpper(aftervowel[0]) + aftervowel.Substring(1) + beforevowel.ToLower() + "ay ");
+                    }
+
+                    /* is the first letter of the word a vowel and is the word
+                     * all lower case? */
+
                     else if (vowels.Contains(firstletterofword) == false)
                     {
                         firstvowel = word.IndexOfAny(vowels.ToCharArray());
-
                         string beforevowel = word.Substring(0, firstvowel);
                         string aftervowel = word.Substring(firstvowel);
-
+                      
                         Console.Write(aftervowel + beforevowel + "ay ");
                     }
+
                     else
                     { }
                 }  
