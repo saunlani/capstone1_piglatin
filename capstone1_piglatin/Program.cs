@@ -87,9 +87,6 @@ namespace capstone1_piglatin
                     //
                     // moves first letter of word to end of input and adds "ay".
 
-                    // TODO: if word starts with a consonant,move all of the consonants that
-                    // appear before the first vowel (ex: shrewd = ewdshray)
-
                     else if (vowels.Contains(firstletterofword) == false & vowels.Contains(word) == false)
                     {
                         Console.Write(restofword + firstletterofword + "ay ");
