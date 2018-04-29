@@ -81,8 +81,9 @@ namespace capstone1_piglatin
                     // index of first vowel appearance
                     int firstvowel = 0;
 
+
                     /* is the input ONLY symbols or numbers? (ex: 15252)*/
-                    if (IsOnlyLetters(word) == false)
+                    if (IsOnlyLetters(word) == false || PuncChecker(word))
                     {
 
                         Console.Write(word + " ");
