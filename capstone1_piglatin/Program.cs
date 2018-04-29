@@ -286,7 +286,7 @@ namespace capstone1_piglatin
                         puncloc = word.IndexOfAny(punctuation.ToCharArray());
                         string beforepunc = word.Substring(0, puncloc);
                         string afterpunc = word.Substring(puncloc);
-                        Console.WriteLine(beforepunc + "ay" + afterpunc);
+                        Console.Write(beforepunc + "ay" + afterpunc + " ");
                     }
                     else
                     { }
@@ -340,7 +340,7 @@ namespace capstone1_piglatin
         // test for punctuation
         static bool PuncChecker(string input)
         {
-            if (Regex.IsMatch(input, @"[.!?,;]"))
+            if (Regex.IsMatch(input, @"[.!?,;:]"))
             {
                 return true;
             }
