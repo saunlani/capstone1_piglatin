@@ -64,6 +64,9 @@ namespace capstone1_piglatin
                     //grabbing the rest of the word
                     string restofword = word.Substring(1, word.Length - 1);
 
+                    //declaring vowels
+                    string vowels = "aeiouAEIOU";
+
                     // index of first vowel appearance
                     int firstvowel = 0;
 
